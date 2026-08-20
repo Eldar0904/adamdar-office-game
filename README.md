@@ -1,8 +1,10 @@
-# vinext-starter
+# adamdar — Office game
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+A Kazakh-language office compatibility game. Colleagues scan a QR code, answer
+11 either/or questions, then see their closest matches and live team results.
+
+The app runs on [vinext](https://github.com/cloudflare/vinext), Cloudflare
+Workers, and Cloudflare D1.
 
 ## Prerequisites
 
@@ -16,16 +18,14 @@ npm run dev
 npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+The project does not use `wrangler.jsonc`.
 
-## Included Shape
+## Project structure
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+- `app/page.tsx`: quiz, QR entry point, result, and stats screens
+- `app/api/answers/route.ts`: validates and stores quiz responses, then returns summary data
+- `db/schema.ts` and `drizzle/`: D1 table schema and migrations
+- `worker/index.ts`: Cloudflare Worker entry point
 
 ## Workspace Auth Headers
 
@@ -87,11 +87,11 @@ or enforce explicit server-side membership or allowlist checks.
 Use SIWC for account pages, user-specific dashboards, saved records, and write
 actions tied to the current ChatGPT user. Leave public content anonymous.
 
-## Useful Commands
+## Useful commands
 
 - `npm run dev`: start local development
 - `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
+- `npm test`: validate the app's source-level quiz and API contracts
 - `npm run db:generate`: generate Drizzle migrations after schema changes
 
 ## Learn More

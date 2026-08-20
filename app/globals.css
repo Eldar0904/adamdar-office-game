@@ -1,7 +1,7 @@
 @import "tailwindcss";
 :root { --ink:#17142c; --paper:#f7f2e8; --cream:#fffdf8; --coral:#ff6b57; --violet:#6657d9; --mint:#b9e8d2; }
 * { box-sizing:border-box; }
-body { margin:0; color:var(--ink); background:var(--paper); font-family:Arial,Helvetica,sans-serif; }
+body { margin:0; color:var(--ink); background:var(--paper); font-family:var(--font-noto-sans),Arial,sans-serif; }
 button,input { font:inherit; }
 .app-shell { min-height:100vh; padding:28px 20px; background:radial-gradient(circle at 10% 10%,rgba(255,107,87,.16),transparent 28%),radial-gradient(circle at 90% 85%,rgba(102,87,217,.14),transparent 30%),var(--paper); }
 .brand-bar { max-width:1040px; margin:0 auto 28px; display:flex; align-items:center; gap:11px; }

@@ -1,0 +1,55 @@
+
+> adamdar-office-game@0.1.0 dev
+> vinext dev
+
+
+  vinext dev  (Vite 8.0.13)
+
+10:04:20 [vite] (ssr) [optimizer] bundling dependencies...
+  ➜  Local:   http://localhost:3000/
+  ➜  Debug:   http://localhost:3000/__debug
+ GET / 200 in 2.7s (compile: 1787202234.4s, render: 2.5s)
+ GET /api/answers 200 in 814ms
+ GET /api/answers 200 in 77ms
+ GET /api/answers 200 in 203ms
+ GET / 200 in 281ms (compile: 1787202234.3s, render: 168ms)
+ GET /api/answers 200 in 55ms
+ GET /api/answers 200 in 48ms
+ GET /api/answers 200 in 70ms
+ GET /?play=1 200 in 120ms (compile: 1787202234.3s, render: 64ms)
+ GET /api/answers 200 in 46ms
+ GET /api/answers 200 in 177ms
+ GET /api/answers 200 in 54ms
+ GET /api/answers 200 in 52ms
+ GET /api/answers 200 in 37ms
+ GET /api/answers 200 in 38ms
+ GET /api/answers 200 in 38ms
+ GET /api/answers 200 in 51ms
+ GET /api/answers 200 in 58ms
+ GET /api/answers 200 in 38ms
+ GET /api/answers 200 in 48ms
+ GET /?play=1 200 in 118ms (compile: 1787202234.3s, render: 75ms)
+ GET /api/answers 200 in 117ms
+ GET /api/answers 200 in 60ms
+ GET /api/answers 200 in 45ms
+ GET /api/answers 200 in 32ms
+ GET /api/answers 200 in 56ms
+ GET /api/answers 200 in 50ms
+ POST /api/answers 200 in 108ms
+ GET /api/answers 200 in 63ms
+ GET /api/answers 200 in 49ms
+ GET /api/answers 200 in 37ms
+ GET /api/answers 200 in 47ms
+ GET /api/answers 200 in 57ms
+10:16:06 [vite] vite.config.ts changed, restarting server...
+service core:user:adamdar-office-game: Compatibility flag specified multiple times: nodejs_compat
+10:16:07 [vite] The Workers runtime failed to start. There is likely additional logging output above.
+10:16:07 [vite] server restart failed
+10:17:27 [vite] vite.config.ts changed, restarting server...
+10:17:27 [vite] vite.config.ts changed, restarting server...
+service core:user:adamdar-office-game: Compatibility flag specified multiple times: nodejs_compat
+10:17:28 [vite] The Workers runtime failed to start. There is likely additional logging output above.
+10:17:28 [vite] server restart failed
+service core:user:adamdar-office-game: Compatibility flag specified multiple times: nodejs_compat
+10:17:29 [vite] The Workers runtime failed to start. There is likely additional logging output above.
+10:17:29 [vite] server restart failed
