@@ -1,0 +1,8 @@
+import { env } from "cloudflare:workers";
+const questionCount=11;
+async function init(){await env.DB.prepare(`CREATE TABLE IF NOT EXISTS participants_v5 (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, answers TEXT NOT NULL, created_at INTEGER NOT NULL)`).run();}
+async function rows(){await init();const r=await env.DB.prepare("SELECT name, answers FROM participants_v5 ORDER BY created_at DESC").all<{name:string;answers:string}>();return r.results.map(x=>({name:x.name,answers:JSON.parse(x.answers) as number[]}));}
+function summary(all:{name:string;answers:number[]}[],current?:number[]){const totals=Array.from({length:questionCount},()=>[0,0]);for(const p of all)p.answers.forEach((v,i)=>{if((v===0||v===1)&&totals[i])totals[i][v]++});const matches=current?all.slice(1).map(p=>({name:p.name,score:p.answers.reduce((n,v,i)=>n+(v===current[i]?1:0),0)})).sort((a,b)=>b.score-a.score):[];return{count:all.length,totals,matches,latest:all.slice(0,5).map(p=>p.name)};}
+export async function GET(){return Response.json(summary(await rows()),{headers:{"cache-control":"no-store"}});}
+export async function POST(request:Request){const body=await request.json() as {name?:string;answers?:number[]};const name=(body.name||"").trim().slice(0,24),answers=body.answers;if(!name||!Array.isArray(answers)||answers.length!==questionCount||answers.some(v=>v!==0&&v!==1))return Response.json({error:"Деректер дұрыс емес"},{status:400});await init();await env.DB.prepare("INSERT INTO participants_v5 (name, answers, created_at) VALUES (?, ?, ?)").bind(name,JSON.stringify(answers),Date.now()).run();return Response.json(summary(await rows(),answers));}
+
