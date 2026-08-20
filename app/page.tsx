@@ -15,6 +15,7 @@ const questions = [
   ["Түскі үзілісте серуендеу", "Түскі үзілісте кеңседе демалу"],
   ["Қарбызды нанмен жеу", "Қарбызды нансыз жеу"],
 ] as const;
+const playUrl = "https://adamdar-office-game.aulbilim.workers.dev/?play=1";
 type Summary = { count:number; totals:number[][]; matches:{name:string;score:number}[]; latest:string[] };
 
 export default function Home() {
@@ -23,7 +24,7 @@ export default function Home() {
   const [summary,setSummary]=useState<Summary>({count:0,totals:questions.map(()=>[0,0]),matches:[],latest:[]});
   const loadStats=async()=>{const r=await fetch("/api/answers",{cache:"no-store"});if(r.ok)setSummary(await r.json());};
   useEffect(()=>{const p=new URLSearchParams(location.search);if(p.get("screen")==="stats")setMode("stats");else if(p.get("play")==="1")setMode("start");loadStats();},[]);
-  useEffect(()=>{if(mode!=="landing"&&mode!=="stats")return;if(mode==="landing")QRCode.toDataURL(location.origin+location.pathname+"?play=1",{width:360,margin:1,color:{dark:"#17142c",light:"#fffdf8"}}).then(setQr);const id=setInterval(loadStats,5000);return()=>clearInterval(id);},[mode]);
+  useEffect(()=>{if(mode!=="landing"&&mode!=="stats")return;if(mode==="landing")QRCode.toDataURL(playUrl,{width:360,margin:1,color:{dark:"#17142c",light:"#fffdf8"}}).then(setQr);const id=setInterval(loadStats,5000);return()=>clearInterval(id);},[mode]);
   const choose=async(answer:number)=>{const next=[...answers,answer];setAnswers(next);if(index<questions.length-1){setIndex(index+1);return;}setBusy(true);const r=await fetch("/api/answers",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({name:name.trim(),answers:next})});if(r.ok){setSummary(await r.json());setMode("result");}setBusy(false);};
   const reset=()=>{setMode("start");setName("");setIndex(0);setAnswers([]);};
   const popular=useMemo(()=>summary.totals.map((v,i)=>{const total=v[0]+v[1],winner=v[1]>v[0]?1:0;return{i,winner,pct:total?Math.round(v[winner]/total*100):0};}).sort((a,b)=>b.pct-a.pct)[0],[summary]);
