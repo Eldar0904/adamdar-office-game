@@ -4,7 +4,7 @@ import vinext from "vinext";
 import { defineConfig } from "vite";
 import hostingConfig from "./.openai/hosting.json";
 
-const ADAMDAR_DATABASE_ID = "bb7d5605-d1e1-4fbe-a372-4c0feaffbdfb";
+const ADAMDAR_DATABASE_ID = "760b1505-0dbe-4e80-a2e5-e71a5812cb83";
 
 const { d1, r2 } = hostingConfig;
 
